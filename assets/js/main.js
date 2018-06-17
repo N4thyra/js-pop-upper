@@ -127,7 +127,7 @@ this.popAppItem = function () {
 	popApp.items.push(_container.item);
 
 	setTimeout(function () {
-		_.close(_defaults);
+//		_.close(_defaults);
 	}, _defaults.removeTime);
 };
 
@@ -146,6 +146,6 @@ new popAppItem({
 	removeTime: '3000',
 	type: 'error',
 	animationEnd: '',
-	position: 'top-right'
+	position: 'bottom-left'
 });
 
