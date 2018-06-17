@@ -1,57 +1,22 @@
 var popApp = {};
 popApp.items = [];
+popApp.destruct = function () {
+	var item;
 
-
-// helpers
-function animateProgress(el) {
-	setTimeout(function () {
-		el.style.width = 100 + '%';
-	}, 500);
-}
-
-function removeAnimation(el, names, timer) {
-	setTimeout(function () {
-		for (var i = 0; i < names.length; i++) {
-			el.classList.remove(names[i]);
-		}
-	}, timer)
-}
-
-function extendDefaults(source, properties, animationList) {
-	var property;
-
-	for (property in source) {
-		if (properties.hasOwnProperty(property)) {
-			if (property === 'animationStart' || property === 'animationEnd') {
-				source[property] = isAnimationAllowed(property === 'animationStart' ? animationList.in : animationList.out, properties[property]) ? properties[property] : source[property];
-			} else {
-				source[property] = properties[property];
-			}
-		}
+	for (item of this.items) {
+		item.remove();
 	}
-	return source;
-}
-
-function isAnimationAllowed(list, animation) {
-	var value;
-
-	for (value of list) {
-		if (value === animation) {
-			return true;
-		}
-	}
-	return false;
-}
-
+};
 
 this.popAppItem = function () {
 	if (!(this instanceof popAppItem)) {
 		return new popAppItem(arguments[0])
 	}
 
-	this.closeButton = null;
 	var _ = this;
-	var _defaults = {
+	var container;
+
+	_.options = {
 		heading: 'Success',
 		text: 'Here is a random text',
 		removeTime: '3000',
@@ -61,13 +26,38 @@ this.popAppItem = function () {
 		animationEnd: 'fadeOutLeft'
 	};
 
+	_.options = _.helpers().extendDefaults(_.options, arguments[0], _.helpers().animationList);
 
-	var _selectors = {
-		body: document.querySelector('body'),
-		popUpWrapper: document.querySelector('.pop-up__wrapper')
-	};
+	container = _.buildContainer(_.options);
 
-	var _container = {
+	if (!_.helpers().selectors.popUpWrapper) {
+		container.wrapper.appendChild(container.item);
+		container.fragment.appendChild(container.wrapper);
+		_.helpers().selectors.body.appendChild(container.fragment);
+	} else {
+		container.fragment.appendChild(container.item);
+		_.helpers().selectors.popUpWrapper.appendChild(container.fragment);
+	}
+
+	_.helpers().animationProgress(container.loader);
+	_.helpers().removeAnimation(container.item, ['animated', 'fadeInUp'], 1000);
+
+	_.item = container.item;
+	container.btn.addEventListener('click', function () {
+		_.remove();
+	});
+
+	popApp.items.push(this);
+
+	if (_.options.removeTime > 0) {
+		setTimeout(function () {
+			_.remove();
+		}, _.options.removeTime);
+	}
+};
+
+popAppItem.prototype.buildContainer = function (options) {
+	var container = {
 		fragment: document.createDocumentFragment(),
 		wrapper: document.createElement('div'),
 		item: document.createElement('div'),
@@ -79,72 +69,108 @@ this.popAppItem = function () {
 		btn: document.createElement('div'),
 	};
 
-	var _animationList = {
-		in: ['fadeInUp'],
-		out: ['fadeOutLeft', 'fadeOutDown', 'zoomOutDown', 'zoomOutLeft']
-	};
 
-	_defaults = extendDefaults(_defaults, arguments[0], _animationList);
+	container.wrapper.setAttribute('class', `pop-up__wrapper pop-up__wrapper--${options.position}`);
+	container.item.setAttribute('class', `pop-up__item pop-up__item--${options.type} animated fadeInUp`);
+	container.loader.setAttribute('class', `pop-up__loader`);
+	container.img.setAttribute('class', `pop-up__img pop-up__img--info`);
+	container.content.setAttribute('class', `pop-up__content`);
+	container.heading.setAttribute('class', `pop-up__heading`);
+	container.text.setAttribute('class', `pop-up__text`);
+	container.btn.setAttribute('class', `pop-up__close`);
 
-	_container.wrapper.setAttribute('class', `pop-up__wrapper pop-up__wrapper--${_defaults.position}`);
-	_container.item.setAttribute('class', `pop-up__item pop-up__item--${_defaults.type} animated fadeInUp`);
-	_container.loader.setAttribute('class', `pop-up__loader`);
-	_container.img.setAttribute('class', `pop-up__img pop-up__img--info`);
-	_container.content.setAttribute('class', `pop-up__content`);
-	_container.heading.setAttribute('class', `pop-up__heading`);
-	_container.text.setAttribute('class', `pop-up__text`);
-	_container.btn.setAttribute('class', `pop-up__close`);
+	container.heading.innerHTML = options.heading;
+	container.text.innerHTML = options.text;
 
-	_container.heading.innerHTML = _defaults.heading;
-	_container.text.innerHTML = _defaults.text;
+	container.item.appendChild(container.loader);
+	container.item.appendChild(container.img);
+	container.item.appendChild(container.content);
+	container.item.appendChild(container.btn);
+	container.content.appendChild(container.heading);
+	container.content.appendChild(container.text);
 
-	_container.item.appendChild(_container.loader);
-	_container.item.appendChild(_container.img);
-	_container.item.appendChild(_container.content);
-	_container.item.appendChild(_container.btn);
-	_container.content.appendChild(_container.heading);
-	_container.content.appendChild(_container.text);
-
-
-	if (!_selectors.popUpWrapper) {
-		_container.wrapper.appendChild(_container.item);
-		_container.fragment.appendChild(_container.wrapper);
-		_selectors.body.appendChild(_container.fragment);
-	} else {
-		_container.fragment.appendChild(_container.item);
-		_selectors.popUpWrapper.appendChild(_container.fragment);
-	}
-
-	animateProgress(_container.loader);
-	removeAnimation(_container.item, ['animated', 'fadeInUp'], 1000);
-
-	_.item = _container.item;
-	_.closeButton = _container.btn;
-	_.closeButton.addEventListener('click', function () {
-		_.close(_defaults);
-	});
-
-	popApp.items.push(_container.item);
-
-	setTimeout(function () {
-//		_.close(_defaults);
-	}, _defaults.removeTime);
+	return container;
 };
 
-
-popAppItem.prototype.close = function (defaults) {
+popAppItem.prototype.remove = function () {
 	var _ = this;
-	_.item.className += ' animated ' + defaults.animationEnd;
+	_.item.className += ' animated ' + _.options.animationEnd;
 	setTimeout(function () {
 		_.item.remove();
 	}, 1000);
 };
 
+popAppItem.prototype.helpers = function () {
+
+	// Helper variables
+	var animationList = {
+		in: ['fadeInUp'],
+		out: ['fadeOutLeft', 'fadeOutDown', 'zoomOutDown', 'zoomOutLeft']
+	};
+
+	var selectors = {
+		body: document.querySelector('body'),
+		popUpWrapper: document.querySelector('.pop-up__wrapper')
+	};
+
+	// Helper functions
+	function animationProgress(el) {
+		setTimeout(function () {
+			el.style.width = 100 + '%';
+		}, 500);
+	}
+
+	function removeAnimation(el, names, timer) {
+		setTimeout(function () {
+			for (var i = 0; i < names.length; i++) {
+				el.classList.remove(names[i]);
+			}
+		}, timer)
+	}
+
+	function extendDefaults(source, properties, animationList) {
+		var property;
+
+		for (property in source) {
+			if (properties.hasOwnProperty(property)) {
+				if (property === 'animationStart' || property === 'animationEnd') {
+					source[property] = isAnimationAllowed(property === 'animationStart' ? animationList.in : animationList.out, properties[property]) ? properties[property] : source[property];
+				} else {
+					source[property] = properties[property];
+				}
+			}
+		}
+		return source;
+	}
+
+	function isAnimationAllowed(list, animation) {
+		var value;
+
+		for (value of list) {
+			if (value === animation) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	return {
+		animationList: animationList,
+		selectors: selectors,
+		animationProgress: animationProgress,
+		removeAnimation: removeAnimation,
+		extendDefaults: extendDefaults,
+	}
+};
+
+
+
 new popAppItem({
 	heading: 'Error',
 	text: 'I don\' know what to put here',
-	removeTime: '3000',
+	removeTime: '',
 	type: 'error',
+	animationStart: '',
 	animationEnd: '',
 	position: 'bottom-left'
 });
