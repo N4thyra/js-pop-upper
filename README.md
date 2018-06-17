@@ -4,7 +4,7 @@ A plain JavaScript plugin for creating fancy looking notification windows.
 No dependencies are needed.
 ** beta version! **
 
-<img src="//i.imgur.com/JRUUmTg.png" />
+<img src="https://i.imgur.com/JRUUmTg.png" />
 
 # How to use
 ```javascript
