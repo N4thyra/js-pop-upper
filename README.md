@@ -2,7 +2,7 @@
 
 A plain JavaScript plugin for creating fancy looking notification windows. 
 No dependencies are needed.
-** beta version! **
+**beta version!**
 
 <img src="https://i.imgur.com/JRUUmTg.png" />
 

@@ -27,12 +27,12 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="114">
-              <caret line="6" column="18" lean-forward="false" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+              <caret line="6" column="28" lean-forward="false" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
               <folding>
-                <marker date="1529218584426" expanded="true" signature="251:396" ph="{&quot;heading&quot;: 'Success'...}" />
-                <marker date="1529218584426" expanded="true" signature="456:597" ph="{&quot;heading&quot;: 'Error'...}" />
-                <marker date="1529218584426" expanded="true" signature="659:804" ph="{&quot;heading&quot;: 'Warning'...}" />
-                <marker date="1529218584426" expanded="true" signature="863:1002" ph="{&quot;heading&quot;: 'Error'...}" />
+                <marker date="1529218613040" expanded="true" signature="249:394" ph="{&quot;heading&quot;: 'Success'...}" />
+                <marker date="1529218613040" expanded="true" signature="454:595" ph="{&quot;heading&quot;: 'Error'...}" />
+                <marker date="1529218613040" expanded="true" signature="657:802" ph="{&quot;heading&quot;: 'Warning'...}" />
+                <marker date="1529218613040" expanded="true" signature="861:1000" ph="{&quot;heading&quot;: 'Error'...}" />
               </folding>
             </state>
           </provider>
@@ -201,12 +201,12 @@
       <workItem from="1529002059290" duration="1331000" />
       <workItem from="1529131836280" duration="17747000" />
       <workItem from="1529167300921" duration="32000" />
-      <workItem from="1529216754535" duration="1829000" />
+      <workItem from="1529216754535" duration="1858000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35324000" />
+    <option name="totallyTimeSpent" value="35353000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="2562" height="1410" extended-state="6" />
@@ -479,12 +479,12 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
-          <caret line="6" column="18" lean-forward="false" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+          <caret line="6" column="28" lean-forward="false" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
           <folding>
-            <marker date="1529218584426" expanded="true" signature="251:396" ph="{&quot;heading&quot;: 'Success'...}" />
-            <marker date="1529218584426" expanded="true" signature="456:597" ph="{&quot;heading&quot;: 'Error'...}" />
-            <marker date="1529218584426" expanded="true" signature="659:804" ph="{&quot;heading&quot;: 'Warning'...}" />
-            <marker date="1529218584426" expanded="true" signature="863:1002" ph="{&quot;heading&quot;: 'Error'...}" />
+            <marker date="1529218613040" expanded="true" signature="249:394" ph="{&quot;heading&quot;: 'Success'...}" />
+            <marker date="1529218613040" expanded="true" signature="454:595" ph="{&quot;heading&quot;: 'Error'...}" />
+            <marker date="1529218613040" expanded="true" signature="657:802" ph="{&quot;heading&quot;: 'Warning'...}" />
+            <marker date="1529218613040" expanded="true" signature="861:1000" ph="{&quot;heading&quot;: 'Error'...}" />
           </folding>
         </state>
       </provider>
