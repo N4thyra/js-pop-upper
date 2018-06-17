@@ -7,8 +7,8 @@ No dependencies are needed.
 <img src="https://i.imgur.com/JRUUmTg.png" />
 
 # How to use
+**Success notification**
 ```javascript
-// Success notification
 new popAppItem({
 	heading: 'Success',
 	text: 'You can put some text here.',
@@ -19,9 +19,8 @@ new popAppItem({
 });
 
 ```
-
+**Error notification**
 ```javascript
-// Error notification
 new popAppItem({
 	heading: 'Error',
 	text: 'You can put some text here.',
@@ -33,8 +32,8 @@ new popAppItem({
 
 ```
 
+**Warning notification**
 ```javascript
-// Warning notification
 new popAppItem({
 	heading: 'Warning',
 	text: 'You can put some text here.',
@@ -46,8 +45,8 @@ new popAppItem({
 
 ```
 
+**Info notification**
 ```javascript
-// Info notification
 new popAppItem({
 	heading: 'Info',
 	text: 'You can put some text here.',
