@@ -58,6 +58,53 @@ new popAppItem({
 
 ```
 
+# Setting Options
+**heading**
+<ul>
+<li>can be anything e.g. a string</li>
+</ul>
+
+**text**
+<ul>
+<li>can be anything e.g. a string</li>
+</ul>
+
+**removeTime**
+<ul>
+<li>can by any number (time is in ms) e.g. 3000</li>
+</ul>
+
+**type**
+<ul>
+<li>success</li>
+<li>error</li>
+<li>warning</li>
+<li>information</li>
+</ul>
+
+**animationStart**
+<ul>
+<li>fadeOutLeft</li>
+<li>fadeOutRight</li>
+<li>fadeOutDown</li>
+<li>zoomOutDown</li>
+<li>zoomOutLeft</li>
+<li>zoomOutRight</li>
+</ul>
+
+**animationEnd**
+<ul>
+<li>fadeInUp</li>
+</ul>
+
+**position**
+<ul>
+<li>bottom-left</li>
+<li>bottom-right</li>
+<li>top-right</li>
+<li>top-left</li>
+</ul>
+
 # Copyright
 
 MIT © [Jiri Laza](https://github.com/N4thyra)
