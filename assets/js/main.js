@@ -1,9 +1,7 @@
 var popApp = {};
 popApp.items = [];
 popApp.destruct = function () {
-	var item;
-
-	for (item of this.items) {
+	for (var item of this.items) {
 		item.remove();
 	}
 };
@@ -26,6 +24,8 @@ this.popAppItem = function () {
 		animationEnd: 'fadeOutLeft'
 	};
 
+	var re = /(bottom|top)-\w+/i;
+
 	_.options = _.helpers().extendDefaults(_.options, arguments[0], _.helpers().animationList);
 
 	container = _.buildContainer(_.options);
@@ -37,6 +37,10 @@ this.popAppItem = function () {
 	} else {
 		container.fragment.appendChild(container.item);
 		_.helpers().selectors.popUpWrapper.appendChild(container.fragment);
+	}
+
+	if(_.helpers().selectors.popUpWrapper.className.match(re)[0] !== _.options.position) {
+		_.helpers().selectors.popUpWrapper.className = _.helpers().selectors.popUpWrapper.className.replace(re,_.options.position);
 	}
 
 	_.helpers().animationProgress(container.loader);
@@ -70,14 +74,14 @@ popAppItem.prototype.buildContainer = function (options) {
 	};
 
 
-	container.wrapper.setAttribute('class', `pop-up__wrapper pop-up__wrapper--${options.position}`);
-	container.item.setAttribute('class', `pop-up__item pop-up__item--${options.type} animated fadeInUp`);
-	container.loader.setAttribute('class', `pop-up__loader`);
-	container.img.setAttribute('class', `pop-up__img pop-up__img--info`);
-	container.content.setAttribute('class', `pop-up__content`);
-	container.heading.setAttribute('class', `pop-up__heading`);
-	container.text.setAttribute('class', `pop-up__text`);
-	container.btn.setAttribute('class', `pop-up__close`);
+	container.wrapper.setAttribute('class', 'pop-up__wrapper pop-up__wrapper--' + options.position);
+	container.item.setAttribute('class', 'pop-up__item pop-up__item--' + options.type + ' animated fadeInUp');
+	container.loader.setAttribute('class', 'pop-up__loader');
+	container.img.setAttribute('class', 'pop-up__img pop-up__img--info');
+	container.content.setAttribute('class', 'pop-up__content');
+	container.heading.setAttribute('class', 'pop-up__heading');
+	container.text.setAttribute('class', 'pop-up__text');
+	container.btn.setAttribute('class', 'pop-up__close');
 
 	container.heading.innerHTML = options.heading;
 	container.text.innerHTML = options.text;
@@ -105,7 +109,7 @@ popAppItem.prototype.helpers = function () {
 	// Helper variables
 	var animationList = {
 		in: ['fadeInUp'],
-		out: ['fadeOutLeft', 'fadeOutDown', 'zoomOutDown', 'zoomOutLeft']
+		out: ['fadeOutLeft', 'fadeOutRight', 'fadeOutDown', 'zoomOutDown', 'zoomOutLeft', 'zoomOutRight']
 	};
 
 	var selectors = {
@@ -168,10 +172,9 @@ popAppItem.prototype.helpers = function () {
 new popAppItem({
 	heading: 'Error',
 	text: 'I don\' know what to put here',
-	removeTime: '',
-	type: 'error',
+	removeTime: '5000',
+	type: 'warning',
 	animationStart: '',
-	animationEnd: '',
-	position: 'bottom-left'
+	animationEnd: 'fadeOutRight',
+	position: 'bottom-right'
 });
-

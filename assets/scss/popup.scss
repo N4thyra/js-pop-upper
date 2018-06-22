@@ -1,16 +1,17 @@
 $parent: '.pop-up';
 
 .pop-up {
-	& *,
-	&::before *,
-	&::after * {
-		box-sizing: border-box;
-	}
 
 	&__wrapper {
 		position: fixed;
 		width: 250px;
 		z-index: 9000;
+		box-sizing: border-box;
+		& *,
+		& *::before,
+		& *::after {
+			box-sizing: border-box;
+		}
 
 		&--top-left {
 			top: 20px;
